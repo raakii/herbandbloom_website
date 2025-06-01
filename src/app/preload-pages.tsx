@@ -13,11 +13,7 @@ export default function PreloadAllPages() {
       
       // Liste complète de toutes vos routes
       const routes = [
-        '/',
-        '/about',
-        '/services',
-        '/contact',
-        '/education',
+        '/'
         // Routes dynamiques - ajoutez tous les IDs que vous avez
   
       ];
