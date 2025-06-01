@@ -43,8 +43,8 @@ const kaushan = Kaushan_Script({
 });
 
 export const metadata = {
-  title: 'Afira',
-  description: 'Afira website',
+  title: 'Herb&Bloom',
+  description: 'Herb&Bloom website',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

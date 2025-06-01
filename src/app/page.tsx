@@ -254,9 +254,9 @@ export default function Cafe(){
                         <div className="section-title ms-lg-4 text-center text-lg-start">
                             <h4 className="title text-white title-dark text-uppercase mb-4">Herbs at Their Best</h4>
                             <p className="text-white-50 mb-0">If you are going to use a natural hair oil, choose one packed with fresh, potent herbs. Ours is crafted to bring your roots to life and your strands to strength — with every drop.</p>
-                            <div className="mt-4">
+                            {/* <div className="mt-4">
                                 <Link href="#" className="btn btn-font-sm btn-lg btn-light text-uppercase mt-2">Learn More</Link>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     
