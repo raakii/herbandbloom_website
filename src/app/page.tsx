@@ -188,9 +188,24 @@ export default function Cafe(){
                             <p className="text-muted mb-0 mt-2">{item.desc}</p>
                           </div>
                         </div>
+                        <div className="d-flex justify-content-center mt-3">
+                            <button 
+                                onClick={() => {
+                                    const phoneNumber = "+221776588190"; // Replace with your WhatsApp number
+                                    const message = "Salut ! Je veux commander une huile Bloom & Grow. Voici mes infos :\n• Nom :\n• Adresse de livraison :\n• Quantité :";
+                                    const encodedMessage = encodeURIComponent(message);
+                                    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+                                    window.open(whatsappURL, '_blank');
+                                }}
+                                className="btn btn-font-sm btn-lg btn-primary text-uppercase mt-2"
+                            >
+                                Order Now
+                            </button>
+                        </div>
                       </div>
                     );
                   })}
+                   
                 </div>
             </div>
 
