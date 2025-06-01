@@ -59,7 +59,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             __html: `
               // Préchargement immédiat des pages principales
               document.addEventListener('DOMContentLoaded', function() {
-                const criticalRoutes = ['/', '/about', '/services', '/contact'];
+                const criticalRoutes = ['/'];
                 criticalRoutes.forEach(route => {
                   const link = document.createElement('link');
                   link.rel = 'prefetch';
