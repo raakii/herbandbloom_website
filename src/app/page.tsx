@@ -66,10 +66,16 @@ export default function Cafe(){
                             style={{
                                 backgroundColor: '#6b4f27',
                                 borderRadius: '2.5rem',
-                                fontSize: 36,
-                                padding: '2rem 2rem',
+                                fontSize: 'clamp(1.2rem, 5vw, 2.25rem)',
+                                padding: '0.7em 1.2em',
                                 letterSpacing: 2,
-                                boxShadow: '0 4px 16px rgba(0,0,0,0.12)'
+                                boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
+                                lineHeight: 1.1,
+                                minWidth: 0,
+                                minHeight: 0,
+                                textAlign: 'center',
+                                position: 'relative',
+                                top: '2.5rem' // Move it a bit more to the bottom
                             }}
                         >
                             33% OFF
@@ -102,20 +108,46 @@ export default function Cafe(){
                             style={{ maxWidth: '260px', height: 'auto', marginRight: '2rem' }}
                             alt="img"
                           />
-                          <div className="flex-1 ms-md-4 w-100">
+                          <div className="flex-1 ms-md-4 w-100 ">
                             <div className="d-flex justify-content-between border-bottom pb-2">
-                              <Link href="#" className="text-dark title h6 mb-0 fw-semibold">{item.title}</Link>
-                              <div className="d-flex align-items-center">
-                            <span style={{ fontWeight: 700, fontSize: 30, color: "#888", textDecoration: "line-through", marginRight: 20 }}>
+                            <span
+                                className="text-dark title h6 mb-0 fw-semibold"
+                                style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
+                            >
+                                {item.title}
+                            </span>
+                            <div className="d-flex align-items-center">
+                            <span
+                                style={{
+                                    fontWeight: 700,
+                                    fontSize: "clamp(20px, 5vw, 34px)",
+                                    color: "#888",
+                                    textDecoration: "line-through",
+                                    marginRight: 20,
+                                }}
+                            >
                                 15 000
                             </span>
-                            <span style={{ fontWeight: 900, fontSize: 28, color: "#537660 " }}>
+                            <span
+                                style={{
+                                    fontWeight: 900,
+                                    fontSize: "clamp(18px, 4.5vw, 32px)",
+                                    color: "#537660 ",
+                                }}
+                            >
                                 10 000
                             </span>
-                            <span style={{ marginLeft: 12, fontWeight: 600, fontSize: 24, color: "#888" }}>
+                            <span
+                                style={{
+                                    marginLeft: 12,
+                                    fontWeight: 600,
+                                    fontSize: "clamp(16px, 4vw, 28px)",
+                                    color: "#888",
+                                }}
+                            >
                                 FCFA
                             </span>
-                        </div>
+                            </div>
                             </div>
                             <p className="text-muted mb-0 mt-2">{item.desc}</p>
                           </div>
