@@ -34,7 +34,7 @@ export default function CafeFooter(){
                     <div className="row align-items-center">
                         <div className="col-sm-6">
                             <div className="text-sm-start text-center">
-                                <p className="mb-0" style={{ color: "#e5decf" }}>{new Date().getFullYear()} © Bloom & Grow. Made with care with <i className="mdi mdi-heart text-danger"></i> in Senegal.</p>
+                                <p className="mb-0" style={{ color: "#e5decf" }}>{new Date().getFullYear()} © Herb & Bloom. Made with care and <i className="mdi mdi-heart text-danger"></i> in Senegal.</p>
                             </div>
                         </div>
 
