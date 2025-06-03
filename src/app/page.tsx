@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import NavbarTwo from "../../components/navbarTwo.js";
 import { useTranslations } from "./hooks/useTranslations";
 import { useLanguage } from "./context/LanguageContext";
+import OrderButton from "./components/OrderButton";
 
 import { Parallax } from 'react-parallax';
 
@@ -58,21 +59,8 @@ export default function Cafe(){
                     <span className="text-white-50 fw-normal kaushan-font">
                         {language === 'en' ? 'Nurturing Hair & Heritage Since 2025' : 'Soins des Cheveux & Héritage Depuis 2025'}
                     </span>
-                    <div className="mt-4">
-                    <button
-                        className="btn btn-font-sm btn-lg btn-primary text-uppercase mt-2 kaushan-font"
-                        onClick={() => {
-                        const phoneNumber = "+221776588190";
-                        const message = language === 'en' 
-                            ? "Hi! I want to order a Bloom & Grow oil. Here's my info:\n• Name:\n• Delivery address:\n• Quantity:"
-                            : "Salut ! Je veux commander une huile Bloom & Grow. Voici mes infos :\n• Nom :\n• Adresse de livraison :\n• Quantité :";
-                        const encodedMessage = encodeURIComponent(message);
-                        const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-                        window.open(whatsappURL, '_blank');
-                        }}
-                    >
-                        {language === 'en' ? 'Order Now' : 'Commander'}
-                    </button>
+                    <div className="mt-4 kaushan-font" >
+                        <OrderButton className="kaushan-font" />
                     </div>
                     <div className="position-absolute end-0 top-0 mt-3 me-3" style={{ zIndex: 10 }}>
                         <div
@@ -136,20 +124,7 @@ export default function Cafe(){
                                 </div>
                             </div>
                             <div className="d-flex justify-content-center mt-3">
-                                <button 
-                                    onClick={() => {
-                                        const phoneNumber = "+221776588190";
-                                        const message = language === 'en' 
-                                            ? "Hi! I want to order a Bloom & Grow oil. Here's my info:\n• Name:\n• Delivery address:\n• Quantity:"
-                                            : "Salut ! Je veux commander une huile Bloom & Grow. Voici mes infos :\n• Nom :\n• Adresse de livraison :\n• Quantité :";
-                                        const encodedMessage = encodeURIComponent(message);
-                                        const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-                                        window.open(whatsappURL, '_blank');
-                                    }}
-                                    className="btn btn-font-sm btn-lg btn-primary text-uppercase mt-2"
-                                >
-                                    {language === 'en' ? 'Order Now' : 'Commander'}
-                                </button>
+                                <OrderButton />
                             </div>
                         </div>
                     );
@@ -176,25 +151,12 @@ export default function Cafe(){
                                 <h6 className="text-primary">{language === 'en' ? 'Click this button below' : 'Cliquez sur ce bouton ci-dessous'}</h6>
                                 <p className="text-muted my-4 px-lg-4">
                                     {language === 'en' 
-                                        ? "We're currently taking orders through WhatsApp! Just click the button below, fill in your name, delivery address, and quantity — and we'll take care of the rest."
-                                        : "Nous prenons actuellement les commandes via WhatsApp ! Cliquez simplement sur le bouton ci-dessous, remplissez votre nom, votre adresse de livraison et la quantité — et nous nous occupons du reste."}
+                                        ? translations.order_instructions
+                                        : translations.order_instructions}
                                 </p>
                                 <Link href="tel:+221776588190" className="text-primary h6">+221 77 658 81 90</Link>
                                 <div className="mt-4 pt-2">
-                                    <button 
-                                        onClick={() => {
-                                            const phoneNumber = "+221776588190";
-                                            const message = language === 'en' 
-                                                ? "Hi! I want to order a Bloom & Grow oil. Here's my info:\n• Name:\n• Delivery address:\n• Quantity:"
-                                                : "Salut ! Je veux commander une huile Bloom & Grow. Voici mes infos :\n• Nom :\n• Adresse de livraison :\n• Quantité :";
-                                            const encodedMessage = encodeURIComponent(message);
-                                            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-                                            window.open(whatsappURL, '_blank');
-                                        }}
-                                        className="btn btn-font-sm btn-lg btn-primary text-uppercase mt-2"
-                                    >
-                                        {language === 'en' ? 'Order Now' : 'Commander'}
-                                    </button>
+                                    <OrderButton  />
                                 </div>
                             </div>
                         </div>
@@ -209,20 +171,10 @@ export default function Cafe(){
                     <div className="col-12">
                         <div className="section-title text-center mb-4 pb-2">
                             <h4 className="title mb-4">
-                                {language === 'en' ? 'Discover Bloom & Grow' : 'Découvrez Bloom & Grow'}
+                                {language === 'en' ? translations.discover_title : translations.discover_title}
                             </h4>
                             <p className="text-muted mx-auto para-desc mb-0">
-                                {language === 'en' ? (
-                                    <>
-                                        One Formula. Infinite Care.
-                                        Bloom & Grow is a handcrafted herbal oil designed to restore your hair's vitality and celebrate your natural beauty. Made with love, passion, and years of herbal practice, it blends powerful botanicals like rosemary, moringa, lavender, fenugreek, hibiscus, and peppermint into a rich base of argan, coconut, olive, and castor oil — to nourish, strengthen, and awaken your strands naturally.
-                                    </>
-                                ) : (
-                                    <>
-                                        Une Formule. Des Soins Infinis.
-                                        Bloom & Grow est une huile aux herbes artisanale conçue pour restaurer la vitalité de vos cheveux et célébrer votre beauté naturelle. Fabriquée avec amour, passion et des années de pratique des plantes, elle mélange des plantes puissantes comme le romarin, le moringa, la lavande, le fenugrec, l'hibiscus et la menthe poivrée dans une riche base d'huile d'argan, de coco, d'olive et de ricin — pour nourrir, fortifier et réveiller vos cheveux naturellement.
-                                    </>
-                                )}
+                                {language === 'en' ? translations.discover_desc : translations.discover_desc}
                             </p>
                         </div>
                     </div>
@@ -283,12 +235,12 @@ export default function Cafe(){
                     <div className="col-lg-6 col-12 mt-4 mt-lg-0 pt-2 pt-lg-0 order-lg-1 order-2">
                         <div className="section-title ms-lg-4 text-center text-lg-start">
                             <h4 className="title text-white title-dark text-uppercase mb-4">
-                                {language === 'en' ? 'Herbs at Their Best' : 'Herbes à Leur Meilleur'}
+                                {language === 'en' ? translations.herbs_at_their_best_title : translations.herbs_at_their_best_title}
                             </h4>
                             <p className="text-white-50 mb-0">
                                 {language === 'en' 
-                                    ? "If you are going to use a natural hair oil, choose one packed with fresh, potent herbs. Ours is crafted to bring your roots to life and your strands to strength — with every drop."
-                                    : "Si vous allez utiliser une huile capillaire naturelle, choisissez-en une remplie d'herbes fraîches et puissantes. La nôtre est conçue pour donner vie à vos racines et de la force à vos cheveux — avec chaque goutte."}
+                                    ? translations.herbs_at_their_best_desc
+                                    : translations.herbs_at_their_best_desc}
                             </p>
                         </div>
                     </div>
@@ -315,20 +267,20 @@ export default function Cafe(){
 
                             <p className="text-muted">
                                 {language === 'en' 
-                                    ? "I've always had a deep love for my natural hair, for its strength, its texture, its story. From a young age, I started experimenting with oils and herbs, learning how to care for my afro hair and watching it thrive. Over time, it became more than a routine, it became a passion."
-                                    : "J'ai toujours eu un amour profond pour mes cheveux naturels, pour leur force, leur texture, leur histoire. Dès mon plus jeune âge, j'ai commencé à expérimenter avec des huiles et des herbes, apprenant à prendre soin de mes cheveux afro et à les voir s'épanouir. Avec le temps, c'est devenu plus qu'une routine, c'est devenu une passion."}
+                                    ? translations.founder_bio_p1
+                                    : translations.founder_bio_p1}
                             </p>
                             
                             <p className="text-muted mb-0">
                                 {language === 'en'
-                                    ? "I love creating, testing, crafting formulas with my own hands and seeing them come to life. Bloom & Grow was born from that passion: a love for hair, for nature, and for making something that truly helps others feel confident and cared for."
-                                    : "J'adore créer, tester, élaborer des formules de mes propres mains et les voir prendre vie. Bloom & Grow est née de cette passion : un amour pour les cheveux, pour la nature, et pour créer quelque chose qui aide vraiment les autres à se sentir confiants et bien soignés."}
+                                    ? translations.founder_bio_p2
+                                    : translations.founder_bio_p2}
                             </p>
                             <Image src='/images/IMG2.JPG' width={0} height={0} sizes="100vw" className="avatar avatar-medium mt-3" style={{width:'110px', height:'auto'}} alt=""/> 
 
                             <div className="mt-3">
                                 <small className="text-uppercase fw-medium">
-                                    {language === 'en' ? 'CEO & Founder Herb&Bloom' : 'PDG & Fondatrice Herb&Bloom'}
+                                    {language === 'en' ? translations.founder_title : translations.founder_title}
                                 </small>
                             </div>
                         </div>

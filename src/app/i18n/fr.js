@@ -69,8 +69,22 @@ export const language_toggle_fr = "FR";
 
 export const order_now = "Commander";
 
+export const order_instructions = "Nous prenons actuellement les commandes via WhatsApp ! Cliquez simplement sur le bouton ci-dessous, remplissez votre nom, votre adresse de livraison et la quantité — et nous nous occupons du reste.";
+
+export const discover_title = "Découvrez Bloom & Grow";
+export const discover_desc = "Une Formule. Des Soins Infinis. Bloom & Grow est une huile aux herbes artisanale conçue pour restaurer la vitalité de vos cheveux et célébrer votre beauté naturelle. Fabriquée avec amour, passion et des années de pratique des plantes, elle mélange des plantes puissantes comme le romarin, le moringa, la lavande, le fenugrec, l'hibiscus et la menthe poivrée dans une riche base d'huile d'argan, de coco, d'olive et de ricin — pour nourrir, fortifier et réveiller vos cheveux naturellement.";
+
+export const herbs_at_their_best_title = "Herbes à Leur Apogée";
+export const herbs_at_their_best_desc = "Si vous allez utiliser une huile capillaire naturelle, choisissez-en une remplie d'herbes fraîches et puissantes. La nôtre est conçue pour donner vie à vos racines et de la force à vos cheveux — avec chaque goutte.";
+
+export const founder_bio_p1 = "J'ai toujours eu un amour profond pour mes cheveux naturels, pour leur force, leur texture, leur histoire. Dès mon plus jeune âge, j'ai commencé à expérimenter avec des huiles et des herbes, apprenant à prendre soin de mes cheveux afro et à les voir s'épanouir. Avec le temps, c'est devenu plus qu'une routine, c'est devenu une passion.";
+
+export const founder_bio_p2 = "J'adore créer, tester, élaborer des formules de mes propres mains et les voir prendre vie. Bloom & Grow est née de cette passion : un amour pour les cheveux, pour la nature, et pour créer quelque chose qui aide vraiment les autres à se sentir confiants et bien soignés.";
+
+export const founder_title = "Fondatrice de Herb&Bloom";
+
 export const footer_opening_hours = "Heures d'ouverture (Commandes en ligne uniquement)";
 export const footer_location = "Emplacement : Dakar, Sénégal";
 export const footer_weekdays = "LUNDI - VENDREDI : 10H - 18H";
 export const footer_weekends = "SAMEDI - DIMANCHE : 10H - 16H";
-export const footer_copyright = year => `${year} © Herb & Bloom. Fait avec soin et <i class='mdi mdi-heart text-danger'></i> au Sénégal.`; 
+export const footer_copyright = year => `${year} © Herb & Bloom. Fait avec soin et <i class='mdi mdi-heart text-danger'></i>.`; 

@@ -69,8 +69,22 @@ export const language_toggle_fr = "FR";
 
 export const order_now = "Order Now";
 
+export const order_instructions = "We're currently taking orders through WhatsApp! Just click the button below, fill in your name, delivery address, and quantity — and we'll take care of the rest.";
+
+export const discover_title = "Discover Bloom & Grow";
+export const discover_desc = "One Formula. Infinite Care. Bloom & Grow is a handcrafted herbal oil designed to restore your hair's vitality and celebrate your natural beauty. Made with love, passion, and years of herbal practice, it blends powerful botanicals like rosemary, moringa, lavender, fenugreek, hibiscus, and peppermint into a rich base of argan, coconut, olive, and castor oil — to nourish, strengthen, and awaken your strands naturally.";
+
+export const herbs_at_their_best_title = "Herbs at Their Best";
+export const herbs_at_their_best_desc = "If you are going to use a natural hair oil, choose one packed with fresh, potent herbs. Ours is crafted to bring your roots to life and your strands to strength — with every drop.";
+
+export const founder_bio_p1 = "I've always had a deep love for my natural hair, for its strength, its texture, its story. From a young age, I started experimenting with oils and herbs, learning how to care for my afro hair and watching it thrive. Over time, it became more than a routine, it became a passion.";
+
+export const founder_bio_p2 = "I love creating, testing, crafting formulas with my own hands and seeing them come to life. Bloom & Grow was born from that passion: a love for hair, for nature, and for making something that truly helps others feel confident and cared for.";
+
+export const founder_title = "Founder of Herb&Bloom";
+
 export const footer_opening_hours = "Opening Hours (Online orders only)";
 export const footer_location = "Location: Dakar, Senegal";
 export const footer_weekdays = "MONDAY - FRIDAY: 10AM - 6PM";
 export const footer_weekends = "SATURDAY - SUNDAY: 10AM - 4PM";
-export const footer_copyright = year => `${year} © Herb & Bloom. Made with care and <i class='mdi mdi-heart text-danger'></i> in Senegal.`; 
+export const footer_copyright = year => `${year} © Herb & Bloom. Made with care and <i class='mdi mdi-heart text-danger'></i>.`; 
