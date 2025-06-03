@@ -3,6 +3,7 @@ import React,{useState,useEffect} from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from 'next/navigation'
+import { useTranslations } from "../src/app/hooks/useTranslations";
 
 export default function NavbarTwo({navClass,manuClass,navDark}){
     let [scroll, setScroll] = useState(false);
@@ -10,6 +11,7 @@ export default function NavbarTwo({navClass,manuClass,navDark}){
 
     let [manu , setManu] = useState('');
     let pathname = usePathname();
+    const translations = useTranslations();
 
     useEffect(() => {
         setManu(pathname)
@@ -79,10 +81,10 @@ export default function NavbarTwo({navClass,manuClass,navDark}){
                 <div id="navigation" style={{ display: isMenu ? 'block' : 'none' }}>
                     <ul className={manuClass}>
                         <li className="/index-business">
-                            <Link href="#about">A propos</Link><span className="menu-arrow"></span>
+                            <Link href="#about">{translations.navbar_about}</Link><span className="menu-arrow"></span>
                         </li>
 
-                        <li ><Link href="#contact" className="sub-menu-item">Contact us</Link></li>
+                        <li ><Link href="#contact" className="sub-menu-item">{translations.navbar_contact}</Link></li>
                     </ul>
                 </div>
             </div>
