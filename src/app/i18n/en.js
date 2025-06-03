@@ -64,6 +64,11 @@ export const clientData = [
 export const navbar_about = "About";
 export const navbar_contact = "Contact Us";
 
+export const language_toggle_en = "EN";
+export const language_toggle_fr = "FR";
+
+export const order_now = "Order Now";
+
 export const footer_opening_hours = "Opening Hours (Online orders only)";
 export const footer_location = "Location: Dakar, Senegal";
 export const footer_weekdays = "MONDAY - FRIDAY: 10AM - 6PM";

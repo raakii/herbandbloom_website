@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import NavbarTwo from "../../components/navbarTwo.js";
-import LanguageToggle from "./components/LanguageToggle";
 import { useTranslations } from "./hooks/useTranslations";
 import { useLanguage } from "./context/LanguageContext";
 
@@ -42,7 +41,6 @@ export default function Cafe(){
     return(
         <>
         <NavbarTwo navClass="defaultscroll sticky" manuClass="navigation-menu nav-right nav-light" navDark={false}/>
-        <LanguageToggle />
 
         <section className="bg-half-260 d-table w-100 overflow-hidden" id="home" style={{backgroundImage:"url('/images/IMG_2559.jpeg')"}}>
             <div className="bg-overlay bg-gradient-overlay"></div>

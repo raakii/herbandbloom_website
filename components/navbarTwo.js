@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from 'next/navigation'
 import { useTranslations } from "../src/app/hooks/useTranslations";
+import LanguageToggle from "../src/app/components/LanguageToggle";
 
 export default function NavbarTwo({navClass,manuClass,navDark}){
     let [scroll, setScroll] = useState(false);
@@ -66,7 +67,8 @@ export default function NavbarTwo({navClass,manuClass,navDark}){
                 </Link>
                 }
                 <div className="menu-extras">
-                    <div className="menu-item">
+                    <div className="menu-item d-flex align-items-center">
+                        <LanguageToggle />
                         <Link href="#" className={`navbar-toggle ${isMenu ? 'open' : ''}`} id="isToggle" onClick={() => toggleMenu()}>
                             <div className="lines">
                                 <span></span>

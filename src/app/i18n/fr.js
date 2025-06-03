@@ -64,6 +64,11 @@ export const clientData = [
 export const navbar_about = "À propos";
 export const navbar_contact = "Contactez-nous";
 
+export const language_toggle_en = "EN";
+export const language_toggle_fr = "FR";
+
+export const order_now = "Commander";
+
 export const footer_opening_hours = "Heures d'ouverture (Commandes en ligne uniquement)";
 export const footer_location = "Emplacement : Dakar, Sénégal";
 export const footer_weekdays = "LUNDI - VENDREDI : 10H - 18H";

@@ -1,9 +1,11 @@
 'use client';
 
 import { useLanguage } from '../context/LanguageContext';
+import { useTranslations } from '../hooks/useTranslations';
 
 export default function LanguageToggle() {
     const { language, toggleLanguage } = useLanguage();
+    const translations = useTranslations();
 
     return (
         <button
@@ -11,10 +13,6 @@ export default function LanguageToggle() {
             className="language-toggle"
             aria-label={`Switch to ${language === 'en' ? 'French' : 'English'}`}
             style={{
-                position: 'fixed',
-                top: '20px',
-                right: '20px',
-                zIndex: 1000,
                 padding: '8px 16px',
                 backgroundColor: '#fff',
                 border: '1px solid #ddd',
@@ -22,10 +20,12 @@ export default function LanguageToggle() {
                 cursor: 'pointer',
                 fontSize: '14px',
                 boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                transition: 'all 0.3s ease'
+                transition: 'all 0.3s ease',
+                marginLeft: '15px',
+                marginTop: '12px'
             }}
         >
-            {language === 'en' ? 'FR' : 'EN'}
+            {language === 'en' ? translations.language_toggle_fr : translations.language_toggle_en}
         </button>
     );
 } 
