@@ -2,8 +2,11 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "../src/app/hooks/useTranslations";
 
 export default function CafeFooter(){
+    const translations = useTranslations();
+    const year = new Date().getFullYear();
     return(
         <>
         <footer className="footer" style={{ backgroundColor: "#6b4f27" }}>
@@ -14,13 +17,19 @@ export default function CafeFooter(){
                             <div className="row justify-content-center">
                                 <div className="col-12 text-center">
                                     <div className="title-heading">
-                                        <span className="display-4 fw-medium text-white title-dark d-block" style={{ color: "#f5f5dc" }}>Opening Hours (Online orders only)</span>
+                                        <style jsx>{`
+                                            @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+                                            .kaushan-font {
+                                                font-family: 'Kaushan Script', cursive;
+                                            }
+                                        `}</style>
+                                        <span className="display-4 fw-medium text-white title-dark d-block kaushan-font" style={{ color: "#f5f5dc" }}>{translations.footer_opening_hours}</span>
                                     </div>
 
                                     <div className="content mt-4 pt-3">
-                                        <p className="mb-2 h6" style={{ color: "#e5decf" }}>Location: Dakar, Senegal</p>
-                                        <p className="mb-2 h6" style={{ color: "#e5decf" }}>MONDAY - FRIDAY: 10AM - 6PM</p>
-                                        <p className="mb-2 h6" style={{ color: "#e5decf" }}>SATURDAY - SUNDAY: 10AM - 4PM</p>
+                                        <p className="mb-2 h6" style={{ color: "#e5decf" }}>{translations.footer_location}</p>
+                                        <p className="mb-2 h6" style={{ color: "#e5decf" }}>{translations.footer_weekdays}</p>
+                                        <p className="mb-2 h6" style={{ color: "#e5decf" }}>{translations.footer_weekends}</p>
                                     </div>
                                 </div>
                             </div>
@@ -34,7 +43,7 @@ export default function CafeFooter(){
                     <div className="row align-items-center">
                         <div className="col-sm-6">
                             <div className="text-sm-start text-center">
-                                <p className="mb-0" style={{ color: "#e5decf" }}>{new Date().getFullYear()} © Herb & Bloom. Made with care and <i className="mdi mdi-heart text-danger"></i> in Senegal.</p>
+                                <p className="mb-0" style={{ color: "#e5decf" }} dangerouslySetInnerHTML={{ __html: translations.footer_copyright(year) }} />
                             </div>
                         </div>
 
