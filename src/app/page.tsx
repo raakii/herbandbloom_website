@@ -120,7 +120,7 @@ export default function Cafe(){
                                             </span>
                                         </div>
                                     </div>
-                                    <p className="text-muted mb-0 mt-2">{item.desc}</p>
+                                    <p className="text-muted mb-0 mt-2 text-center text-md-start">{item.desc}</p>
                                 </div>
                             </div>
                             <div className="d-flex justify-content-center mt-3">
