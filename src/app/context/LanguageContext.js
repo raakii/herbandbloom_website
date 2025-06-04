@@ -5,13 +5,13 @@ import { createContext, useContext, useState, useEffect } from 'react';
 const LanguageContext = createContext();
 
 export function LanguageProvider({ children }) {
-    const [language, setLanguage] = useState('en'); // Default language is English
+    const [language, setLanguage] = useState('fr'); // Default language is French
 
     // Detect browser language on component mount
     useEffect(() => {
         const browserLang = navigator.language || navigator.userLanguage;
-        if (browserLang.startsWith('fr')) {
-            setLanguage('fr');
+        if (browserLang.startsWith('en')) {
+            setLanguage('en');
         }
     }, []);
 
