@@ -59,8 +59,8 @@ export default function Cafe(){
                     <span className="text-white-50 fw-normal kaushan-font">
                         {language === 'en' ? 'Nurturing Hair & Heritage Since 2025' : 'Soins des Cheveux & Héritage Depuis 2025'}
                     </span>
-                    <div className="mt-4 kaushan-font" >
-                        <OrderButton className="kaushan-font" />
+                    <div className="mt-4 kaushan-font d-flex justify-content-center justify-content-md-start">
+                        <OrderButton />
                     </div>
                     <div className="position-absolute end-0 top-0 mt-3 me-3" style={{ zIndex: 10 }}>
                         <div
@@ -104,7 +104,7 @@ export default function Cafe(){
                                     alt="img"
                                 />
                                 <div className="flex-1 ms-md-4 w-100 ">
-                                    <div className="d-flex flex-column flex-md-row justify-content-between border-bottom pb-2">
+                                    <div className="d-flex flex-column flex-xl-row justify-content-between border-bottom pb-2">
                                         <span className="text-dark title h6 mb-2 mb-md-0 fw-semibold text-center text-md-start" style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                                             {item.title}
                                         </span>
@@ -147,8 +147,8 @@ export default function Cafe(){
                         <div className="bg-white bg-cta px-3 px-md-4 px-lg-5">
                             <div className="section-title text-center">
                                 <Image src='/images/checkout.svg' width={45} height={45} className="avatar avatar-md-sm" alt=""/>
-                                <h4 className="title mt-2">{language === 'en' ? 'How to order' : 'Comment commander'}</h4>
-                                <h6 className="text-primary">{language === 'en' ? 'Click this button below' : 'Cliquez sur ce bouton ci-dessous'}</h6>
+                                <h4 className="title mt-2">{language === 'en' ? translations.how_to_order_title : translations.how_to_order_title}</h4>
+                                <h6 className="text-primary">{language === 'en' ? translations.how_to_order_subtitle : translations.how_to_order_subtitle}</h6>
                                 <p className="text-muted my-4 px-lg-4">
                                     {language === 'en' 
                                         ? translations.order_instructions
@@ -156,7 +156,7 @@ export default function Cafe(){
                                 </p>
                                 <Link href="tel:+221776588190" className="text-primary h6">+221 77 658 81 90</Link>
                                 <div className="mt-4 pt-2">
-                                    <OrderButton  />
+                                    <OrderButton />
                                 </div>
                             </div>
                         </div>
@@ -262,7 +262,7 @@ export default function Cafe(){
                     </div>
 
                     <div className="col-lg-7 col-md-6 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                        <div className="section-title ms-lg-5">
+                        <div className="section-title ms-lg-5 text-center text-lg-start">
                             <h5 className="fw-semibold mb-3">Raki Diallo</h5>
 
                             <p className="text-muted">
@@ -279,6 +279,7 @@ export default function Cafe(){
                             <Image src='/images/IMG2.JPG' width={0} height={0} sizes="100vw" className="avatar avatar-medium mt-3" style={{width:'110px', height:'auto'}} alt=""/> 
 
                             <div className="mt-3">
+                            
                                 <small className="text-uppercase fw-medium">
                                     {language === 'en' ? translations.founder_title : translations.founder_title}
                                 </small>

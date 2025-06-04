@@ -52,9 +52,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <LanguageProvider>
-          {/* Composant pour précharger toutes les pages */}
-          <PreloadAllPages />
-          {children}
+        {/* Composant pour précharger toutes les pages */}
+        <PreloadAllPages />
+        {children}
         </LanguageProvider>
       </body>
     </html>
