@@ -59,7 +59,7 @@ export default function Cafe(){
                     <span className="text-white-50 fw-normal kaushan-font">
                         {language === 'en' ? 'Nurturing Hair & Heritage Since 2025' : 'Soins des Cheveux & Héritage Depuis 2025'}
                     </span>
-                    <div className="mt-4 kaushan-font d-flex justify-content-center justify-content-md-start">
+                    <div className="mt-4 kaushan-font d-flex justify-content-center">
                         <OrderButton />
                     </div>
                     <div className="position-absolute end-0 top-0 mt-3 me-3" style={{ zIndex: 10 }}>
