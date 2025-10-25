@@ -162,3 +162,5 @@ export const product_out_of_stock = "Ce produit est actuellement en rupture de s
 export const bloom_grow_hair_oil = "Huile Capillaire Bloom&Grow";
 export const bloom_butter_hair_cream = "Crème Capillaire Bloom & Butter";
 export const henna_powder = "Poudre de Henné";
+export const best_seller = "Meilleure Vente";
+export const new_tag = "Nouveau";

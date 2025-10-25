@@ -217,7 +217,7 @@ export default function Checkout() {
             </section>
 
             {/* Checkout Content */}
-            <section className="section" style={{marginTop: '-150px'}}>
+            <section className="section" style={{marginTop: '-130px'}}>
                 <div className="container">
                     <div className="row">
                         {/* Order Summary */}

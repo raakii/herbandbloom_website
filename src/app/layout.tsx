@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../../public/assets/scss/style.scss';
 import '../../public/assets/css/materialdesignicons.min.css';
+import './globals.css';
 import PreloadAllPages from './preload-pages';
 import { LanguageProvider } from './context/LanguageContext';
 import { CartProvider } from './context/CartContext';

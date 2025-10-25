@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
 
-import "wowjs/css/libs/animate.css";
+// WOW.js CSS removed to prevent errors
 import NavbarTwo from "../../../../components/navbarTwo";
 import ScrollTop from "../../../../components/scrollTop";
 import CafeFooter from "../../../../components/cafeFooter";
@@ -40,8 +40,7 @@ export default function ProductDetail() {
 
     useEffect(() => {
         document.body.classList.add('restaurant-css');
-        import('wowjs').then((WOW) => {
-        });
+        // WOW.js animations disabled to prevent errors
         
         // Set default format for deodorant
         if (product && product.id === 3 && !selectedFormat) {
@@ -88,7 +87,7 @@ export default function ProductDetail() {
             
             {/* Floating Cart Button */}
             <div 
-                className="position-fixed" 
+                className="position-fixed floating-cart-button" 
                 style={{
                     top: '20px',
                     right: '20px',
@@ -122,7 +121,7 @@ export default function ProductDetail() {
             </div>
             
             {/* Breadcrumb */}
-            <section className="section pt-5" style={{marginTop: '100px'}}>
+            <section className="section pt-5 pb-4" style={{marginTop: '100px'}}>
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
@@ -139,7 +138,7 @@ export default function ProductDetail() {
             </section>
 
             {/* Product Detail */}
-            <section className="section" style={{marginTop: '-150px'}}>
+            <section className="section" style={{marginTop: '-100px'}}>
                 <div className="container">
                     <div className="row">
                         {/* Product Images */}

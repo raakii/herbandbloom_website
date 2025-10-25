@@ -10,7 +10,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 const TinySlider = dynamic(()=>import('tiny-slider-react'),{ssr:false})
 import 'tiny-slider/dist/tiny-slider.css';
 
-import "../../../node_modules/wowjs/css/libs/animate.css"
+// WOW.js CSS removed to prevent errors
 import NavbarTwo from "../../../components/navbarTwo";
 import Product from "../../../components/product";
 import ScrollTop from "../../../components/scrollTop";
@@ -33,14 +33,7 @@ export default function IndexFashion(){
     
     useEffect(()=>{
         document.body.classList.add('restaurant-css');
-        import('wowjs').then((WOW) => {
-            const wow = new WOW.default({
-                boxClass: 'wow',
-                animateClass: 'animated',
-                offset: 0,
-                live: true
-            });
-        });
+        // WOW.js animations disabled to prevent errors
     },[])
 
     let settings = {
@@ -84,7 +77,7 @@ export default function IndexFashion(){
         
         {/* Floating Cart Button */}
         <div 
-            className="position-fixed" 
+            className="position-fixed floating-cart-button" 
             style={{
                 top: '20px',
                 right: '20px',

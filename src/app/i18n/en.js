@@ -164,4 +164,6 @@ export const product_out_of_stock = "This product is currently out of stock";
 // Product names
 export const bloom_grow_hair_oil = "Bloom&Grow Hair Oil";
 export const bloom_butter_hair_cream = "Bloom & Butter Hair Cream";
-export const henna_powder = "Henna Powder"; 
+export const henna_powder = "Henna Powder";
+export const best_seller = "Best Seller";
+export const new_tag = "New"; 

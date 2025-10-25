@@ -46,6 +46,28 @@ export default function Cafe(){
     };
     useEffect(()=>{
         document.body.classList.add('cafe-css');
+        
+        // Handle mobile cart button positioning
+        const handleResize = () => {
+            const cartButton = document.getElementById('cart-button-container');
+            if (cartButton) {
+                if (window.innerWidth <= 768) {
+                    cartButton.style.top = '200px';
+                } else {
+                    cartButton.style.top = '20px';
+                }
+            }
+        };
+
+        // Set initial position
+        handleResize();
+
+        // Listen for resize events
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     },[])
 
     const productData = getProductData(language, translations);
@@ -65,13 +87,14 @@ export default function Cafe(){
         />
         {/* Floating Cart Button */}
         <div 
-            className="position-fixed" 
+            className="position-fixed floating-cart-button" 
             style={{
                 top: '20px',
                 right: '20px',
                 zIndex: 1050,
                 cursor: 'pointer'
             }}
+            id="cart-button-container"
         >
             <button 
                 className="btn btn-primary rounded-circle shadow-lg"

@@ -13,7 +13,7 @@ export default function WhatsAppButton() {
 
     return (
         <div 
-            className="position-fixed" 
+            className="position-fixed floating-whatsapp-button" 
             style={{
                 bottom: '20px',
                 right: '20px',
