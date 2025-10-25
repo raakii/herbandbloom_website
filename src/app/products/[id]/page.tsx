@@ -15,6 +15,7 @@ import WhatsAppButton from "../../components/WhatsAppButton";
 
 import { useTranslations } from "@/app/hooks/useTranslations";
 import { useLanguage } from "@/app/context/LanguageContext";
+import { getProductById, getOtherProducts } from "@/app/data/products";
 
 // Product data - you can move this to a separate file later
 
@@ -32,55 +33,8 @@ export default function ProductDetail() {
     const { language } = useLanguage();
     const { product_details } = translations;
     
-    const productData = [
-        {
-            id: 1,
-            image1: '/images/IMG2.JPG',
-            image2: '/images/IMG_2576.jpg',
-            tag: 'Featured',
-            tagClass: 'text-bg-success',
-            product: language === 'en' ? translations.bloom_grow_hair_oil : translations.bloom_grow_hair_oil,
-            amount: '10 000 Fcfa',
-            description: 'Nourishing hair oil made with natural ingredients to promote healthy hair growth and shine. Perfect for all hair types.',
-            sizes: ['50ml'],
-            colors: ['Natural'],
-            inStock: true,
-            rating: 4.8,
-            reviews: 42
-        },
-        {
-            id: 2,
-            image1: '/images/IMG_5474.JPG',
-            image2: '/images/IMG_5454.JPG',
-            tag: 'New',
-            tagClass: 'text-bg-primary',
-            product: language === 'en' ? translations.bloom_butter_hair_cream : translations.bloom_butter_hair_cream,
-            amount: '5 000 Fcfa',
-            description: 'Hydrating hair cream that moisturizes and defines curls while providing long-lasting hold. Ideal for curly and wavy hair.',
-            sizes: ['150ml'],
-            colors: ['Natural'],
-            inStock: true,
-            rating: 4.5,
-            reviews: 8
-        },
-        {
-            id: 4,
-            image1: '/images/henné.png',
-            image2: '/images/henné2.png',
-            tag: 'New',
-            tagClass: 'text-bg-primary',
-            product: language === 'en' ? translations.henna_powder : translations.henna_powder,
-            amount: '2 000 Fcfa',
-            description: 'Henna powder, great for hand decoration, face or hair masks',
-            sizes: ['150g'],
-            colors: ['Natural'],
-            inStock: true,
-            rating: 4.0,
-            reviews: 5
-        }
-    ];
-    // Find the product by ID
-    const product = productData.find(p => p.id === productId);
+    // Get the current product
+    const product = getProductById(productId, language, translations);
     const product_detail = product_details.find((p: { id: number; }) => p.id === productId);
     const size = language === "en" ? "Size" : "Contenance";
 
@@ -198,6 +152,7 @@ export default function ProductDetail() {
                                         height={500} 
                                         className="img-fluid rounded" 
                                         alt={product.product}
+                                        style={{ objectFit: 'cover', width: '100%', height: '500px' }}
                                     />
                                 </div>
                                 <div className="thumbnail-images d-flex gap-2">
@@ -212,7 +167,7 @@ export default function ProductDetail() {
                                             height={100} 
                                             className="img-fluid" 
                                             alt={product.product}
-                                            style={{ objectFit: 'cover' }}
+                                            style={{ objectFit: 'cover', width: '100px', height: '100px' }}
                                         />
                                     </div>
                                     <div 
@@ -226,7 +181,7 @@ export default function ProductDetail() {
                                             height={100} 
                                             className="img-fluid" 
                                             alt={product.product}
-                                            style={{ objectFit: 'cover' }}
+                                            style={{ objectFit: 'cover', width: '100px', height: '100px' }}
                                         />
                                     </div>
                                 </div>
@@ -384,7 +339,7 @@ export default function ProductDetail() {
                         </div>
                     </div>
                     <div className="row">
-                        {productData.filter(p => p.id !== product.id).slice(0, 3).map((item, index) => (
+                        {getOtherProducts(productId, language, translations, 3).map((item, index) => (
                             <div className="col-lg-4 col-md-6 col-12 mt-4 pt-2" key={index}>
                                 <div className="card product-card">
                                     <div className="position-relative">

@@ -79,7 +79,10 @@ export default function WaitingListForm() {
                         disabled={isSubmitting}
                     >
                         {isSubmitting ? (
-                            language === 'en' ? 'Adding...' : 'Ajout en cours...'
+                            <>
+                                <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                {language === 'en' ? 'Adding...' : 'Ajout en cours...'}
+                            </>
                         ) : (
                             language === 'en' ? translations.join_waiting_list : translations.join_waiting_list
                         )}

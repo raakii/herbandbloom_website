@@ -20,80 +20,16 @@ import SlidingCart from "../components/SlidingCart";
 import WhatsAppButton from "../components/WhatsAppButton";
 import { useTranslations } from "../hooks/useTranslations";
 import { useLanguage } from "../context/LanguageContext";
+import { getProductData } from "../data/products";
 
-// Product data will be defined inside the component to use translations
-const productData2 =[
-    {
-        id:1,
-        image1:'/images/IMG_2576.jpg',
-        image2:'/images/IMG_2576.jpg',
-        product:'Bloom&Grow Hair Oil',
-        amount:'10 000 Fcfa',
-        sizes: ['50ml'],
-        inStock: true,
-    },
-    {
-        id:2,
-        image1:'/images/IMG_5474.JPG',
-        image2:'/images/IMG_5454.JPG',
-        tag:'New',
-        tagClass:'text-bg-primary',
-        product:'Bloom & Butter Hair Cream',
-        amount:'5 000 Fcfa',
-        sizes: ['150ml'],
-        inStock: true,
-    },
-    {
-        id:4,
-        image1:'/images/henné.png',
-        image2:'/images/henné2.png',
-        tag:'New',
-        tagClass:'text-bg-primary',
-        product:'Henna Powder',
-        amount:'2 000 Fcfa',
-        sizes: ['150g'],
-        inStock: true,
-    },
-]
+// Product data is now centralized in /data/products.js
 
 export default function IndexFashion(){
     const { cartItems, isCartOpen, closeCart, updateQuantity, removeFromCart, addToCart, openCart, clearCart, cartCount } = useCart();
     const translations = useTranslations();
     const { language } = useLanguage();
     
-    const productData = [
-        {
-            id:1,
-            image1:'/images/IMG_2576.jpg',
-            image2:'/images/IMG_2576.jpg',
-            product: language === 'en' ? translations.bloom_grow_hair_oil : translations.bloom_grow_hair_oil,
-            amount:'10 000 Fcfa',
-            sizes: ['50ml'],
-            inStock: true,
-        },
-        {
-            id:2,
-            image1:'/images/IMG_5474.JPG',
-            image2:'/images/IMG_5454.JPG',
-            tag:'New',
-            tagClass:'text-bg-primary',
-            product: language === 'en' ? translations.bloom_butter_hair_cream : translations.bloom_butter_hair_cream,
-            amount:'5 000 Fcfa',
-            sizes: ['150ml'],
-            inStock: true,
-        },
-        {
-            id:4,
-            image1:'/images/henné.png',
-            image2:'/images/henné2.png',
-            tag:'New',
-            tagClass:'text-bg-primary',
-            product: language === 'en' ? translations.henna_powder : translations.henna_powder,
-            amount:'2 000 Fcfa',
-            sizes: ['150g'],
-            inStock: true,
-        },
-    ];
+    const productData = getProductData(language, translations);
     
     useEffect(()=>{
         document.body.classList.add('restaurant-css');
@@ -295,13 +231,12 @@ export default function IndexFashion(){
                     <div className="col-12 mt-4 pt-2">
                         <div className="tiny-four-item">
                             <TinySlider settings={settings}>
-                                {productData2.map((item,index)=>{
+                                {productData.map((item,index)=>{
                                     return(
                                     <div className="tiny-slide" key={index}>
-                                        <Product item={item} onAddToCart={addToCart} onOpenCart={openCart}/>
+                                        <Product item={item} onAddToCart={addToCart} onOpenCart={openCart} />
                                     </div>
-                                    )
-                                })}
+                                )})}
                             </TinySlider>
                         </div>
                     </div>
@@ -311,5 +246,5 @@ export default function IndexFashion(){
         <CafeFooter/>
         <ScrollTop/>
         </>
-    )
+    );
 }

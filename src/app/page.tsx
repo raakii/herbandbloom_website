@@ -12,6 +12,7 @@ import { useCart } from "./context/CartContext";
 import SlidingCart from "./components/SlidingCart";
 import WhatsAppButton from "./components/WhatsAppButton";
 import WaitingListForm from "./components/WaitingListForm";
+import { getProductData } from "./data/products";
 
 import { Parallax } from 'react-parallax';
 
@@ -47,55 +48,7 @@ export default function Cafe(){
         document.body.classList.add('cafe-css');
     },[])
 
-    const productData =[
-        {
-            id:1,
-            image1:'/images/IMG_2559.jpeg',
-            image2:'/images/IMG_2576.jpg',
-            product: language === 'en' ? translations.bloom_grow_hair_oil : translations.bloom_grow_hair_oil,
-            amount:'10 000 Fcfa',
-            sizes: ['50ml'],
-            inStock: true,
-            rating: 4.8,
-            reviews: 42,
-        },
-        // {
-        //     id:3,
-        //     image1:'/images/IMG10.png',
-        //     image2:'/images/IMG10.png',
-        //     tag:'Sale',
-        //     tagClass:'text-bg-dark',
-        //     product:'Natural Deodorant',
-        //     amount:'$18.99',
-        //     inStock: true,
-        // },
-        {
-            id:2,
-            image1:'/images/IMG_5474.JPG',
-            image2:'/images/IMG_5454.JPG',
-            tag:'New',
-            tagClass:'text-bg-primary',
-            product: language === 'en' ? translations.bloom_butter_hair_cream : translations.bloom_butter_hair_cream,
-            amount:'5 000 Fcfa',
-            sizes: ['150ml'],
-            inStock: true,
-            rating: 4.5,
-            reviews: 8,
-        },
-        {
-            id:4,
-            image1:'/images/henné.png',
-            image2:'/images/henné2.png',
-            tag:'New',
-            tagClass:'text-bg-primary',
-            product: language === 'en' ? translations.henna_powder : translations.henna_powder,
-            amount:'2 000 Fcfa',
-            sizes: ['150g'],
-            inStock: true,
-            rating: 4.0,
-            reviews: 5,
-        },
-    ]
+    const productData = getProductData(language, translations);
    
     return(
         <>
@@ -193,7 +146,7 @@ export default function Cafe(){
             </div>
         </section>
 
-        <section className="section pt-5">
+        <section className="section pt-5 mt-5">
             <div className="container">
                 <div className="row">
                     <div className="col-12">
@@ -218,7 +171,7 @@ export default function Cafe(){
             </div>
         </section>
 
-        <section className="section">
+        <section className="section" style={{marginTop: '-110px'}}>
         <div className="section-title text-center mb-4 pb-2">
         <h4 className="title mb-4">Our muse, Bloom & Grow Hair Oil</h4>
         </div>
