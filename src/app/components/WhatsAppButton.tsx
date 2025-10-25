@@ -5,7 +5,7 @@ export default function WhatsAppButton() {
     const phoneNumber = "+221776588190";
     
     const handleWhatsAppClick = () => {
-        const message = "Bonjour ! Je suis intéressé(e) par vos produits Herb & Bloom. Pouvez-vous me donner plus d'informations ?";
+        const message = "Bonjour ! Je suis intéressé(e) par vos produits Herb & Bloom.";
         const encodedMessage = encodeURIComponent(message);
         const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
         window.open(whatsappURL, '_blank');
