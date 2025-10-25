@@ -149,3 +149,16 @@ export const apply = "Appliquer";
 export const discount = "Remise:";
 export const total = "Total";
 export const shipping = "Livraison:";
+export const other_products = "Autres Produits";
+export const view_details = "Voir Détails";
+export const view_cart = "Voir le Panier";
+export const add_to_cart = "Ajouter au Panier";
+export const out_of_stock = "Rupture de Stock";
+export const please_select_format = "Veuillez sélectionner un format";
+export const please_select_size = "Veuillez sélectionner une taille";
+export const product_out_of_stock = "Ce produit est actuellement en rupture de stock";
+
+// Noms des produits
+export const bloom_grow_hair_oil = "Huile Capillaire Bloom&Grow";
+export const bloom_butter_hair_cream = "Crème Capillaire Bloom & Butter";
+export const henna_powder = "Poudre de Henné";

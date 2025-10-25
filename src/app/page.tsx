@@ -52,10 +52,12 @@ export default function Cafe(){
             id:1,
             image1:'/images/IMG_2559.jpeg',
             image2:'/images/IMG_2576.jpg',
-            product:'Bloom&Grow Hair Oil',
+            product: language === 'en' ? translations.bloom_grow_hair_oil : translations.bloom_grow_hair_oil,
             amount:'10 000 Fcfa',
             sizes: ['50ml'],
             inStock: true,
+            rating: 4.8,
+            reviews: 42,
         },
         // {
         //     id:3,
@@ -73,10 +75,12 @@ export default function Cafe(){
             image2:'/images/IMG_5454.JPG',
             tag:'New',
             tagClass:'text-bg-primary',
-            product:'Bloom & Butter Hair Cream',
+            product: language === 'en' ? translations.bloom_butter_hair_cream : translations.bloom_butter_hair_cream,
             amount:'5 000 Fcfa',
             sizes: ['150ml'],
             inStock: true,
+            rating: 4.5,
+            reviews: 8,
         },
         {
             id:4,
@@ -84,10 +88,12 @@ export default function Cafe(){
             image2:'/images/henné2.png',
             tag:'New',
             tagClass:'text-bg-primary',
-            product:'Henna Powder',
+            product: language === 'en' ? translations.henna_powder : translations.henna_powder,
             amount:'2 000 Fcfa',
             sizes: ['150g'],
             inStock: true,
+            rating: 4.0,
+            reviews: 5,
         },
     ]
    
@@ -160,7 +166,7 @@ export default function Cafe(){
                     <div className="mt-4 kaushan-font d-flex justify-content-center">
                         <OrderButton />
                     </div>
-                    <div className="position-absolute end-0 top-0 mt-3 me-3" style={{ zIndex: 10 }}>
+                    {/* <div className="position-absolute end-0 top-0 mt-3 me-3" style={{ zIndex: 10 }}>
                         <div
                             className="badge text-white fw-bold kaushan-font"
                             style={{
@@ -180,7 +186,7 @@ export default function Cafe(){
                         >
                             33% OFF
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 </div>
             </div>
@@ -235,9 +241,9 @@ export default function Cafe(){
                                             {item.title}
                                         </span>
                                         <div className="d-flex align-items-center justify-content-center justify-content-md-start">
-                                            <span style={{ fontWeight: 700, fontSize: "clamp(20px, 5vw, 34px)", color: "#888", textDecoration: "line-through", marginRight: 20 }}>
+                                            {/* <span style={{ fontWeight: 700, fontSize: "clamp(20px, 5vw, 34px)", color: "#888", textDecoration: "line-through", marginRight: 20 }}>
                                                 15 000
-                                            </span>
+                                            </span> */}
                                             <span style={{ fontWeight: 900, fontSize: "clamp(18px, 4.5vw, 32px)", color: "#537660 " }}>
                                                 10 000
                                             </span>

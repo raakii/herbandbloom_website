@@ -18,50 +18,10 @@ import CafeFooter from "../../../components/cafeFooter";
 import { useCart } from "../context/CartContext";
 import SlidingCart from "../components/SlidingCart";
 import WhatsAppButton from "../components/WhatsAppButton";
+import { useTranslations } from "../hooks/useTranslations";
+import { useLanguage } from "../context/LanguageContext";
 
-const productData =[
-    {
-        id:1,
-        image1:'/images/IMG_2576.jpg',
-        image2:'/images/IMG_2576.jpg',
-        product:'Bloom&Grow Hair Oil',
-        amount:'10 000 Fcfa',
-        sizes: ['50ml'],
-        inStock: true,
-    },
-    // {
-    //     id:2,
-    //     image1:'/images/IMG10.png',
-    //     image2:'/images/IMG10.png',
-    //     tag:'Sale',
-    //     tagClass:'text-bg-dark',
-    //     product:'Natural Deodorant',
-    //     amount:'$18.99',
-    //     inStock: true,
-    // },
-    {
-        id:2,
-        image1:'/images/IMG_5474.JPG',
-        image2:'/images/IMG_5454.JPG',
-        tag:'New',
-        tagClass:'text-bg-primary',
-        product:'Bloom & Butter Hair Cream',
-        amount:'5 000 Fcfa',
-        sizes: ['150ml'],
-        inStock: true,
-    },
-    {
-        id:4,
-        image1:'/images/henné.png',
-        image2:'/images/henné2.png',
-        tag:'New',
-        tagClass:'text-bg-primary',
-        product:'Henna Powder',
-        amount:'2 000 Fcfa',
-        sizes: ['150g'],
-        inStock: true,
-    },
-]
+// Product data will be defined inside the component to use translations
 const productData2 =[
     {
         id:1,
@@ -98,6 +58,42 @@ const productData2 =[
 
 export default function IndexFashion(){
     const { cartItems, isCartOpen, closeCart, updateQuantity, removeFromCart, addToCart, openCart, clearCart, cartCount } = useCart();
+    const translations = useTranslations();
+    const { language } = useLanguage();
+    
+    const productData = [
+        {
+            id:1,
+            image1:'/images/IMG_2576.jpg',
+            image2:'/images/IMG_2576.jpg',
+            product: language === 'en' ? translations.bloom_grow_hair_oil : translations.bloom_grow_hair_oil,
+            amount:'10 000 Fcfa',
+            sizes: ['50ml'],
+            inStock: true,
+        },
+        {
+            id:2,
+            image1:'/images/IMG_5474.JPG',
+            image2:'/images/IMG_5454.JPG',
+            tag:'New',
+            tagClass:'text-bg-primary',
+            product: language === 'en' ? translations.bloom_butter_hair_cream : translations.bloom_butter_hair_cream,
+            amount:'5 000 Fcfa',
+            sizes: ['150ml'],
+            inStock: true,
+        },
+        {
+            id:4,
+            image1:'/images/henné.png',
+            image2:'/images/henné2.png',
+            tag:'New',
+            tagClass:'text-bg-primary',
+            product: language === 'en' ? translations.henna_powder : translations.henna_powder,
+            amount:'2 000 Fcfa',
+            sizes: ['150g'],
+            inStock: true,
+        },
+    ];
     
     useEffect(()=>{
         document.body.classList.add('restaurant-css');

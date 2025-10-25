@@ -151,4 +151,17 @@ export const promo_code = "Promo Code";
 export const apply = "Apply";
 export const discount = "Discount:";
 export const total = "Total";
-export const shipping = "Shipping:"; 
+export const shipping = "Shipping:";
+export const other_products = "Other Products";
+export const view_details = "View Details";
+export const view_cart = "View Cart";
+export const add_to_cart = "Add to Cart";
+export const out_of_stock = "Out of Stock";
+export const please_select_format = "Please select a format";
+export const please_select_size = "Please select a size";
+export const product_out_of_stock = "This product is currently out of stock";
+
+// Product names
+export const bloom_grow_hair_oil = "Bloom&Grow Hair Oil";
+export const bloom_butter_hair_cream = "Bloom & Butter Hair Cream";
+export const henna_powder = "Henna Powder"; 

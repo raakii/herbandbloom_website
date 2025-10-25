@@ -18,68 +18,7 @@ import { useLanguage } from "@/app/context/LanguageContext";
 
 // Product data - you can move this to a separate file later
 
-const productData = [
-    {
-        id: 1,
-        image1: '/images/IMG2.JPG',
-        image2: '/images/IMG_2576.jpg',
-        tag: 'Featured',
-        tagClass: 'text-bg-success',
-        product: 'Bloom&Grow Hair Oil',
-        amount: '10 000 Fcfa',
-        description: 'Nourishing hair oil made with natural ingredients to promote healthy hair growth and shine. Perfect for all hair types.',
-        sizes: ['50ml'],
-        colors: ['Natural'],
-        inStock: true,
-        rating: 4.8,
-        reviews: 156
-    },
-    // {
-    //     id: 3,
-    //     image1: '/images/IMG10.png',
-    //     image2: '/images/IMG10.png',
-    //     product: 'Natural Deodorant',
-    //     amount: '$18.99',
-    //     description: 'Aluminum-free natural deodorant that keeps you fresh all day long. Made with organic ingredients and gentle on sensitive skin.',
-    //     sizes: ['50ml'],
-    //     formats: ['Roll-on', 'Pot'],
-    //     colors: ['Natural'],
-    //     inStock: false,
-    //     rating: 4.6,
-    //     reviews: 89
-    // },
-    {
-        id: 2,
-        image1: '/images/IMG_5474.JPG',
-        image2: '/images/IMG_5454.JPG',
-        tag: 'New',
-        tagClass: 'text-bg-primary',
-        product: 'Bloom & Butter Hair Cream',
-        amount: '5 000 Fcfa',
-        description: 'Hydrating hair cream that moisturizes and defines curls while providing long-lasting hold. Ideal for curly and wavy hair.',
-        sizes: ['150ml'],
-        colors: ['Natural'],
-        inStock: true,
-        rating: 4.7,
-        reviews: 73
-    }
-    ,
-    {
-        id: 4,
-        image1: '/images/henné.png',
-        image2: '/images/henné2.png',
-        tag: 'New',
-        tagClass: 'text-bg-primary',
-        product: 'Henna powder',
-        amount: '2 000 Fcfa',
-        description: 'Henna powder, great for hand decoration, face or hair masks',
-        sizes: ['150g'],
-        colors: ['Natural'],
-        inStock: true,
-        rating: 4.7,
-        reviews: 73
-    }
-];
+// Product data will be defined inside the component to use translations
 
 export default function ProductDetail() {
     const params = useParams();
@@ -92,6 +31,54 @@ export default function ProductDetail() {
     const translations = useTranslations();
     const { language } = useLanguage();
     const { product_details } = translations;
+    
+    const productData = [
+        {
+            id: 1,
+            image1: '/images/IMG2.JPG',
+            image2: '/images/IMG_2576.jpg',
+            tag: 'Featured',
+            tagClass: 'text-bg-success',
+            product: language === 'en' ? translations.bloom_grow_hair_oil : translations.bloom_grow_hair_oil,
+            amount: '10 000 Fcfa',
+            description: 'Nourishing hair oil made with natural ingredients to promote healthy hair growth and shine. Perfect for all hair types.',
+            sizes: ['50ml'],
+            colors: ['Natural'],
+            inStock: true,
+            rating: 4.8,
+            reviews: 42
+        },
+        {
+            id: 2,
+            image1: '/images/IMG_5474.JPG',
+            image2: '/images/IMG_5454.JPG',
+            tag: 'New',
+            tagClass: 'text-bg-primary',
+            product: language === 'en' ? translations.bloom_butter_hair_cream : translations.bloom_butter_hair_cream,
+            amount: '5 000 Fcfa',
+            description: 'Hydrating hair cream that moisturizes and defines curls while providing long-lasting hold. Ideal for curly and wavy hair.',
+            sizes: ['150ml'],
+            colors: ['Natural'],
+            inStock: true,
+            rating: 4.5,
+            reviews: 8
+        },
+        {
+            id: 4,
+            image1: '/images/henné.png',
+            image2: '/images/henné2.png',
+            tag: 'New',
+            tagClass: 'text-bg-primary',
+            product: language === 'en' ? translations.henna_powder : translations.henna_powder,
+            amount: '2 000 Fcfa',
+            description: 'Henna powder, great for hand decoration, face or hair masks',
+            sizes: ['150g'],
+            colors: ['Natural'],
+            inStock: true,
+            rating: 4.0,
+            reviews: 5
+        }
+    ];
     // Find the product by ID
     const product = productData.find(p => p.id === productId);
     const product_detail = product_details.find((p: { id: number; }) => p.id === productId);
@@ -166,7 +153,7 @@ export default function ProductDetail() {
                         justifyContent: 'center',
                         position: 'relative'
                     }}
-                    title="View Cart"
+                    title={language === 'en' ? translations.view_cart : translations.view_cart}
                 >
                     <i className="mdi mdi-cart fs-4 text-white"></i>
                     {cartCount > 0 && (
@@ -338,14 +325,14 @@ export default function ProductDetail() {
                                             disabled={!product.inStock}
                                             onClick={() => {
                                                 if (!product.inStock) {
-                                                    alert('This product is currently out of stock');
+                                                    alert(language === 'en' ? translations.product_out_of_stock : translations.product_out_of_stock);
                                                     return;
                                                 }
                                                 
                                                 if (selectedSize || product.sizes.length === 1) {
                                                     // Check if format is required (for deodorant)
                                                     if (product.id === 3 && !selectedFormat) {
-                                                        alert('Please select a format');
+                                                        alert(language === 'en' ? translations.please_select_format : translations.please_select_format);
                                                         return;
                                                     }
                                                     
@@ -359,11 +346,11 @@ export default function ProductDetail() {
                                                         image: product.image1
                                                     });
                                                 } else {
-                                                    alert('Please select a size');
+                                                    alert(language === 'en' ? translations.please_select_size : translations.please_select_size);
                                                 }
                                             }}
                                         >
-                                            {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                                            {product.inStock ? (language === 'en' ? translations.add_to_cart : translations.add_to_cart) : (language === 'en' ? translations.out_of_stock : translations.out_of_stock)}
                                         </button>
                                     </div>
                                 </div>
@@ -393,7 +380,7 @@ export default function ProductDetail() {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <h4 className="mb-4">Other Products</h4>
+                            <h4 className="mb-4">{language === 'en' ? translations.other_products : translations.other_products}</h4>
                         </div>
                     </div>
                     <div className="row">
@@ -417,9 +404,19 @@ export default function ProductDetail() {
                                     </div>
                                     <div className="card-body">
                                         <h6 className="card-title">{item.product}</h6>
+                                        <div className="d-flex align-items-center mb-2">
+                                            <ul className="list-unstyled text-warning mb-0 me-2">
+                                                {[...Array(5)].map((_, index) => (
+                                                    <li key={index} className="list-inline-item">
+                                                        <i className={`mdi ${index < Math.floor(item.rating || 0) ? 'mdi-star' : 'mdi-star-outline'}`}></i>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                            <span className="text-muted small">({item.rating || 0})</span>
+                                        </div>
                                         <p className="card-text text-primary fw-bold">{item.amount}</p>
                                         <Link href={`/products/${item.id}`} className="btn btn-outline-primary btn-sm">
-                                            View Details
+                                            {language === 'en' ? translations.view_details : translations.view_details}
                                         </Link>
                                     </div>
                                 </div>

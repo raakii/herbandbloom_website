@@ -107,13 +107,16 @@ export default function Product({item, onAddToCart, onOpenCart}){
                 <Link href={`/products/${item.id}`} className="text-dark product-name h6">{item.product}</Link>
                 <div className="d-flex justify-content-between mt-1">
                     <h6 className="text-muted small font-italic mb-0 mt-1">{item.amount} </h6>
-                    <ul className="list-unstyled text-warning mb-0">
-                        <li className="list-inline-item"><i className="mdi mdi-star"></i></li>
-                        <li className="list-inline-item"><i className="mdi mdi-star"></i></li>
-                        <li className="list-inline-item"><i className="mdi mdi-star"></i></li>
-                        <li className="list-inline-item"><i className="mdi mdi-star"></i></li>
-                        <li className="list-inline-item"><i className="mdi mdi-star"></i></li>
-                    </ul>
+                    <div className="d-flex align-items-center">
+                        <ul className="list-unstyled text-warning mb-0 me-2">
+                            {[...Array(5)].map((_, index) => (
+                                <li key={index} className="list-inline-item">
+                                    <i className={`mdi ${index < Math.floor(item.rating || 0) ? 'mdi-star' : 'mdi-star-outline'}`}></i>
+                                </li>
+                            ))}
+                        </ul>
+                        <span className="text-muted small">({item.rating || 0})</span>
+                    </div>
                 </div>
                 {/* Stock Status */}
                 <div className="mt-2">
