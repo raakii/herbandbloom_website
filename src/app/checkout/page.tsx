@@ -127,12 +127,11 @@ export default function Checkout() {
 
             console.log('Email admin envoyé:', adminResult);
 
-            // Ajouter la commande au fichier Excel
+            // Ajouter la commande à la liste des commandes (pour l'admin)
             try {
                 const excelResult = addOrderToExcel(orderData, cartItems);
                 if (excelResult.success) {
-                    console.log(`Commande ajoutée au fichier Excel: ${excelResult.fileName}`);
-                    console.log(`Total des commandes: ${excelResult.totalOrders}`);
+                    console.log(`Commande ajoutée à la liste des commandes: ${excelResult.totalOrders} commandes au total`);
                 } else {
                     console.error('Erreur lors de l\'ajout de la commande:', excelResult.error);
                 }
@@ -144,25 +143,43 @@ export default function Checkout() {
             // Vider le panier après envoi réussi
             clearCart();
             
-            alert('Commande envoyée avec succès ! Vous recevrez un email de confirmation et la commande a été ajoutée au fichier Excel.');
+            alert('Commande envoyée avec succès ! Vous recevrez un email de confirmation.');
             
         } catch (error) {
             console.error('Erreur détaillée lors de l\'envoi de l\'email:', error);
             console.error('Type d\'erreur:', typeof error);
-            console.error('Message d\'erreur:', error.message);
-            console.error('Code d\'erreur:', error.code);
-            console.error('Stack trace:', error.stack);
-            
+            // Typescript: handle 'error' as 'unknown'
+            if (error instanceof Error) {
+                console.error('Message d\'erreur:', error.message);
+                // @ts-expect-error: error may not have a .code property
+                console.error('Code d\'erreur:', error.code);
+                console.error('Stack trace:', error.stack);
+            } else {
+                console.error('Erreur de type inconnu:', error);
+                // Vérification sûre des propriétés d'erreur et log explicite
+                if (typeof error === "object" && error !== null) {
+                    if ("message" in error) {
+                        console.error("Message d'erreur:", (error as any).message);
+                    }
+                    if ("code" in error) {
+                        console.error("Code d'erreur:", (error as any).code);
+                    }
+                    if ("stack" in error) {
+                        console.error("Stack trace:", (error as any).stack);
+                    }
+                } else {
+                    console.error("Erreur inconnue:", error);
+                }
+            }
+
             let errorMessage = 'Erreur lors de l\'envoi de la commande. ';
-            
-            if (error.message && error.message.includes('insufficient authentication scopes')) {
+
+            if (typeof error === "object" && error !== null && "message" in error && typeof (error as any).message === "string" && (error as any).message.includes('insufficient authentication scopes')) {
                 errorMessage += 'Problème d\'autorisation Gmail. Veuillez reconfigurer votre service EmailJS avec les bonnes permissions.';
-            } else if (error.message && error.message.includes('recipients address is empty')) {
+            } else if (typeof error === "object" && error !== null && "message" in error && typeof (error as any).message === "string" && (error as any).message.includes('recipients address is empty')) {
                 errorMessage += 'Adresse email du destinataire vide. Vérifiez votre configuration EmailJS et les variables dans vos templates.';
-            } else if (error.message) {
-                errorMessage += `Détails: ${error.message}`;
-            } else if (error.text) {
-                errorMessage += `Détails: ${error.text}`;
+            } else if (typeof error === "object" && error !== null && "text" in error && typeof (error as any).text === "string") {
+                errorMessage += `Détails: ${(error as any).text}`;
             } else {
                 errorMessage += 'Veuillez vérifier votre configuration EmailJS.';
             }
@@ -183,7 +200,7 @@ export default function Checkout() {
             />
             
             {/* Breadcrumb */}
-            <section className="section pt-5">
+            <section className="section pt-5" style={{marginTop: '100px'}}>
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
@@ -200,7 +217,7 @@ export default function Checkout() {
             </section>
 
             {/* Checkout Content */}
-            <section className="section">
+            <section className="section" style={{marginTop: '-150px'}}>
                 <div className="container">
                     <div className="row">
                         {/* Order Summary */}
@@ -434,9 +451,6 @@ export default function Checkout() {
                                                     <option value="Togo">Togo</option>
                                                     <option value="Bénin">Bénin</option>
                                                     <option value="Ghana">Ghana</option>
-                                                    <option value="Liberia">Liberia</option>
-                                                    <option value="Sierra Leone">Sierra Leone</option>
-                                                    <option value="Cap-Vert">Cap-Vert</option>
                                                     <option value="France">France</option>
                                                     <option value="Belgique">Belgique</option>
                                                     <option value="Suisse">Suisse</option>
@@ -449,40 +463,7 @@ export default function Checkout() {
                                                     <option value="Portugal">Portugal</option>
                                                     <option value="Pays-Bas">Pays-Bas</option>
                                                     <option value="Suède">Suède</option>
-                                                    <option value="Norvège">Norvège</option>
-                                                    <option value="Danemark">Danemark</option>
-                                                    <option value="Finlande">Finlande</option>
-                                                    <option value="Autriche">Autriche</option>
                                                     <option value="Maroc">Maroc</option>
-                                                    <option value="Algérie">Algérie</option>
-                                                    <option value="Tunisie">Tunisie</option>
-                                                    <option value="Égypte">Égypte</option>
-                                                    <option value="Libye">Libye</option>
-                                                    <option value="Soudan">Soudan</option>
-                                                    <option value="Éthiopie">Éthiopie</option>
-                                                    <option value="Kenya">Kenya</option>
-                                                    <option value="Tanzanie">Tanzanie</option>
-                                                    <option value="Ouganda">Ouganda</option>
-                                                    <option value="Rwanda">Rwanda</option>
-                                                    <option value="Burundi">Burundi</option>
-                                                    <option value="Madagascar">Madagascar</option>
-                                                    <option value="Maurice">Maurice</option>
-                                                    <option value="Seychelles">Seychelles</option>
-                                                    <option value="Comores">Comores</option>
-                                                    <option value="Djibouti">Djibouti</option>
-                                                    <option value="Somalie">Somalie</option>
-                                                    <option value="Erythrée">Erythrée</option>
-                                                    <option value="Afrique du Sud">Afrique du Sud</option>
-                                                    <option value="Zimbabwe">Zimbabwe</option>
-                                                    <option value="Zambie">Zambie</option>
-                                                    <option value="Botswana">Botswana</option>
-                                                    <option value="Namibie">Namibie</option>
-                                                    <option value="Angola">Angola</option>
-                                                    <option value="Mozambique">Mozambique</option>
-                                                    <option value="Malawi">Malawi</option>
-                                                    <option value="Zambie">Zambie</option>
-                                                    <option value="Lesotho">Lesotho</option>
-                                                    <option value="Swaziland">Swaziland</option>
                                                     <option value="Autre">Autre</option>
                                                 </select>
                                             </div>

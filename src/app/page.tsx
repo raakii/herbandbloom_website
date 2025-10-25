@@ -10,8 +10,8 @@ import OrderButton from "./components/OrderButton";
 import Product from "../../components/product";
 import { useCart } from "./context/CartContext";
 import SlidingCart from "./components/SlidingCart";
-import CartButton from "./components/CartButton";
 import WhatsAppButton from "./components/WhatsAppButton";
+import WaitingListForm from "./components/WaitingListForm";
 
 import { Parallax } from 'react-parallax';
 
@@ -217,7 +217,7 @@ export default function Cafe(){
         <h4 className="title mb-4">Our muse, Bloom & Grow Hair Oil</h4>
         </div>
             <div className="row mt-4 pt-2 justify-content-center">
-                {menuData.map((item, index) => {
+                {menuData.map((item: { image: string | StaticImport; title: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; desc: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; }, index: React.Key | null | undefined) => {
                     return (
                         <div className="col-lg-8 col-md-8 " key={index}>
                             <div className="portfolio portfolio-primary d-flex align-items-center p-2 pt-3 pb-3 flex-column flex-md-row">
@@ -342,7 +342,7 @@ export default function Cafe(){
 
                     <div className="col-lg-4 col-md-6">
                         <div className="row text-md-start text-center">
-                            {aboutData.slice(3,6).map((item,index)=>{
+                            {aboutData.slice(3,6).map((item: { image: string | StaticImport; title: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; desc: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; },index: React.Key | null | undefined)=>{
                                 return(
                                 <div className="col-12 mt-4 pt-2" key={index}>
                                     <div className="card features feature-primary border-0">
@@ -409,26 +409,7 @@ export default function Cafe(){
                             </p>
                             
                             {/* Email Signup Form */}
-                            <div className="card border-0 shadow-sm">
-                                <div className="card-body p-4">
-                                    <form className="d-flex flex-column flex-md-row gap-3">
-                                        <div className="flex-grow-1">
-                                            <input 
-                                                type="email" 
-                                                className="form-control" 
-                                                placeholder={language === 'en' ? translations.email_placeholder : translations.email_placeholder}
-                                                required
-                                            />
-                                        </div>
-                                        <button 
-                                            type="submit" 
-                                            className="btn btn-primary px-4"
-                                        >
-                                            {language === 'en' ? translations.join_waiting_list : translations.join_waiting_list}
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
+                            <WaitingListForm />
                         </div>
                     </div>
                     

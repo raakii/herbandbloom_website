@@ -17,7 +17,6 @@ import ScrollTop from "../../../components/scrollTop";
 import CafeFooter from "../../../components/cafeFooter";
 import { useCart } from "../context/CartContext";
 import SlidingCart from "../components/SlidingCart";
-import CartButton from "../components/CartButton";
 import WhatsAppButton from "../components/WhatsAppButton";
 
 const productData =[

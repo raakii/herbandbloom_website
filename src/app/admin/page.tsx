@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from "react";
-import { exportAllOrdersToExcel, getTotalOrders, clearAllOrders } from "../utils/excelExport";
+import { exportAllOrdersToExcel, getTotalOrders, clearAllOrders, exportWaitingListToExcel, getWaitingList, clearWaitingList } from "../utils/excelExport";
 import AdminLogin from "../components/AdminLogin";
 
 export default function AdminPage() {
@@ -8,11 +8,14 @@ export default function AdminPage() {
     const [totalOrders, setTotalOrders] = useState(0);
     const [orders, setOrders] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [waitingList, setWaitingList] = useState([]);
+    const [totalWaitingList, setTotalWaitingList] = useState(0);
 
     useEffect(() => {
         // Vérifier l'authentification au chargement
         checkAuthentication();
         loadOrders();
+        loadWaitingList();
     }, []);
 
     const checkAuthentication = () => {
@@ -45,6 +48,16 @@ export default function AdminPage() {
             setTotalOrders(existingOrders.length);
         } catch (error) {
             console.error('Erreur lors du chargement des commandes:', error);
+        }
+    };
+
+    const loadWaitingList = () => {
+        try {
+            const existingWaitingList = getWaitingList();
+            setWaitingList(existingWaitingList);
+            setTotalWaitingList(existingWaitingList.length);
+        } catch (error) {
+            console.error('Erreur lors du chargement de la liste d\'attente:', error);
         }
     };
 
@@ -91,6 +104,41 @@ export default function AdminPage() {
         }
     };
 
+    const handleExportWaitingList = async () => {
+        setIsLoading(true);
+        try {
+            const result = exportWaitingListToExcel();
+            if (result.success) {
+                alert(`Export réussi ! ${result.totalEmails} emails exportés dans ${result.fileName}`);
+            } else {
+                alert(`Erreur lors de l'export: ${result.message || result.error}`);
+            }
+        } catch (error) {
+            console.error('Erreur lors de l\'export:', error);
+            alert('Erreur lors de l\'export de la liste d\'attente');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleClearWaitingList = () => {
+        if (confirm('Êtes-vous sûr de vouloir supprimer tous les emails de la liste d\'attente ? Cette action est irréversible.')) {
+            try {
+                const result = clearWaitingList();
+                if (result.success) {
+                    setWaitingList([]);
+                    setTotalWaitingList(0);
+                    alert('Liste d\'attente supprimée');
+                } else {
+                    alert(`Erreur lors de la suppression: ${result.error}`);
+                }
+            } catch (error) {
+                console.error('Erreur lors de la suppression:', error);
+                alert('Erreur lors de la suppression de la liste d\'attente');
+            }
+        }
+    };
+
     // Si pas authentifié, afficher le formulaire de connexion
     if (!isAuthenticated) {
         return <AdminLogin onLogin={setIsAuthenticated} />;
@@ -114,7 +162,7 @@ export default function AdminPage() {
                     
                     {/* Statistiques */}
                     <div className="row mb-4">
-                        <div className="col-md-4">
+                        <div className="col-md-3">
                             <div className="card bg-primary text-white">
                                 <div className="card-body text-center">
                                     <h3>{totalOrders}</h3>
@@ -122,7 +170,7 @@ export default function AdminPage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-3">
                             <div className="card bg-success text-white">
                                 <div className="card-body text-center">
                                     <h3>{orders.filter(order => new Date(order.timestamp).toDateString() === new Date().toDateString()).length}</h3>
@@ -130,11 +178,19 @@ export default function AdminPage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-3">
                             <div className="card bg-info text-white">
                                 <div className="card-body text-center">
                                     <h3>{orders.reduce((sum, order) => sum + parseFloat(order.total.replace(/[^0-9]/g, '')), 0).toLocaleString('fr-FR')} FCFA</h3>
                                     <p className="mb-0">Chiffre d'affaires total</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-3">
+                            <div className="card bg-warning text-white">
+                                <div className="card-body text-center">
+                                    <h3>{totalWaitingList}</h3>
+                                    <p className="mb-0">Liste d'attente</p>
                                 </div>
                             </div>
                         </div>
@@ -163,6 +219,20 @@ export default function AdminPage() {
                                     disabled={totalOrders === 0}
                                 >
                                     Supprimer toutes les commandes
+                                </button>
+                                <button 
+                                    className="btn btn-warning" 
+                                    onClick={handleExportWaitingList}
+                                    disabled={isLoading || totalWaitingList === 0}
+                                >
+                                    {isLoading ? 'Export en cours...' : 'Exporter liste d\'attente'}
+                                </button>
+                                <button 
+                                    className="btn btn-outline-danger" 
+                                    onClick={handleClearWaitingList}
+                                    disabled={totalWaitingList === 0}
+                                >
+                                    Supprimer liste d'attente
                                 </button>
                             </div>
                         </div>
@@ -209,6 +279,38 @@ export default function AdminPage() {
                         </div>
                     )}
 
+                    {/* Liste d'attente */}
+                    <div className="mt-5">
+                        <h4 className="mb-4">Liste d'attente - Emails</h4>
+                        {totalWaitingList > 0 ? (
+                            <div className="table-responsive">
+                                <table className="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Email</th>
+                                            <th>Date d'inscription</th>
+                                            <th>Heure</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {waitingList.map((item, index) => (
+                                            <tr key={index}>
+                                                <td>{item.email}</td>
+                                                <td>{new Date(item.date).toLocaleDateString('fr-FR')}</td>
+                                                <td>{new Date(item.date).toLocaleTimeString('fr-FR')}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        ) : (
+                            <div className="alert alert-info">
+                                <h5>Aucun email dans la liste d'attente</h5>
+                                <p>Les emails apparaîtront ici une fois que les visiteurs s'inscriront à la liste d'attente.</p>
+                            </div>
+                        )}
+                    </div>
+
                     {/* Instructions */}
                     <div className="mt-5">
                         <div className="card">
@@ -218,9 +320,11 @@ export default function AdminPage() {
                             <div className="card-body">
                                 <ul>
                                     <li><strong>Export Excel :</strong> Télécharge toutes les commandes dans un fichier Excel</li>
-                                    <li><strong>Actualiser :</strong> Met à jour la liste des commandes</li>
-                                    <li><strong>Supprimer :</strong> Supprime toutes les commandes (attention, irréversible)</li>
+                                    <li><strong>Export liste d'attente :</strong> Télécharge tous les emails de la liste d'attente</li>
+                                    <li><strong>Actualiser :</strong> Met à jour la liste des commandes et de la liste d'attente</li>
+                                    <li><strong>Supprimer :</strong> Supprime toutes les commandes ou la liste d'attente (attention, irréversible)</li>
                                     <li><strong>Chaque commande :</strong> Est automatiquement ajoutée au fichier Excel lors de la validation</li>
+                                    <li><strong>Liste d'attente :</strong> Les emails s'inscrivent via le formulaire "Coming Soon"</li>
                                 </ul>
                                 <div className="alert alert-warning">
                                     <strong>Note :</strong> Les commandes sont stockées localement dans le navigateur. 

@@ -1,6 +1,6 @@
 import * as XLSX from 'xlsx';
 
-// Fonction pour ajouter une commande à un fichier Excel existant
+// Fonction pour ajouter une commande (sans téléchargement automatique)
 export const addOrderToExcel = (orderData, cartItems) => {
     try {
         // Récupérer les commandes existantes du localStorage
@@ -29,48 +29,10 @@ export const addOrderToExcel = (orderData, cartItems) => {
         // Sauvegarder dans localStorage
         localStorage.setItem('herb_bloom_orders', JSON.stringify(existingOrders));
         
-        // Créer le fichier Excel avec toutes les commandes
-        const excelData = [
-            // En-têtes
-            ['Date', 'ID Commande', 'Nom Client', 'Email', 'Téléphone', 'Adresse', 'Ville', 'Pays', 'Total', 'Articles']
-        ];
-        
-        // Ajouter toutes les commandes
-        existingOrders.forEach(order => {
-            excelData.push([
-                order.date,
-                order.id,
-                order.customer_name,
-                order.email,
-                order.phone,
-                order.address,
-                order.city,
-                order.country,
-                order.total,
-                order.items
-            ]);
-        });
-        
-        // Créer un workbook
-        const wb = XLSX.utils.book_new();
-        
-        // Créer une feuille de calcul
-        const ws = XLSX.utils.aoa_to_sheet(excelData);
-        
-        // Ajouter la feuille au workbook
-        XLSX.utils.book_append_sheet(wb, ws, 'Commandes Herb & Bloom');
-        
-        // Générer le nom du fichier
-        const fileName = `Commandes_Herb_Bloom_${new Date().toISOString().split('T')[0]}.xlsx`;
-        
-        // Télécharger le fichier
-        XLSX.writeFile(wb, fileName);
-        
         console.log(`Commande ajoutée. Total des commandes: ${existingOrders.length}`);
         
         return { 
             success: true, 
-            fileName, 
             totalOrders: existingOrders.length,
             newOrder 
         };
@@ -154,6 +116,78 @@ export const clearAllOrders = () => {
         return { success: true, message: 'Toutes les commandes ont été supprimées' };
     } catch (error) {
         console.error('Erreur lors de la suppression des commandes:', error);
+        return { success: false, error: error.message };
+    }
+};
+
+// Fonction pour exporter la liste d'attente en Excel
+export const exportWaitingListToExcel = () => {
+    try {
+        const waitingList = JSON.parse(localStorage.getItem('waiting_list_emails') || '[]');
+        
+        if (waitingList.length === 0) {
+            alert('Aucun email dans la liste d\'attente');
+            return { success: false, message: 'Aucun email trouvé' };
+        }
+
+        // Créer les données pour l'Excel
+        const excelData = [
+            // En-têtes
+            ['Email', 'Date d\'inscription', 'Heure d\'inscription']
+        ];
+
+        // Ajouter chaque email
+        waitingList.forEach((item, index) => {
+            const date = new Date(item.date).toLocaleDateString('fr-FR');
+            const time = new Date(item.date).toLocaleTimeString('fr-FR');
+            excelData.push([
+                item.email,
+                date,
+                time
+            ]);
+        });
+
+        // Créer un workbook
+        const wb = XLSX.utils.book_new();
+        
+        // Créer une feuille de calcul
+        const ws = XLSX.utils.aoa_to_sheet(excelData);
+        
+        // Ajouter la feuille au workbook
+        XLSX.utils.book_append_sheet(wb, ws, 'Liste d\'attente');
+        
+        // Générer le nom du fichier
+        const fileName = `Liste_Attente_Herb_Bloom_${new Date().toISOString().split('T')[0]}.xlsx`;
+        
+        // Télécharger le fichier
+        XLSX.writeFile(wb, fileName);
+        
+        return { success: true, fileName, totalEmails: waitingList.length };
+        
+    } catch (error) {
+        console.error('Erreur lors de l\'export de la liste d\'attente:', error);
+        return { success: false, error: error.message };
+    }
+};
+
+// Fonction pour obtenir la liste d'attente
+export const getWaitingList = () => {
+    try {
+        const waitingList = JSON.parse(localStorage.getItem('waiting_list_emails') || '[]');
+        return waitingList;
+    } catch (error) {
+        console.error('Erreur lors de la récupération de la liste d\'attente:', error);
+        return [];
+    }
+};
+
+// Fonction pour vider la liste d'attente
+export const clearWaitingList = () => {
+    try {
+        localStorage.removeItem('waiting_list_emails');
+        return { success: true, message: 'Liste d\'attente supprimée' };
+    } catch (error) {
+        console.error('Erreur lors de la suppression de la liste d\'attente:', error);
         return { success: false, error: error.message };
     }
 };

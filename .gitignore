@@ -39,3 +39,37 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Project specific files
+*.xlsx
+*.xls
+*.csv
+*.log
+
+# Documentation files (optional - can be committed if needed)
+EMAIL_SETUP.md
+ADMIN_AUTH.md
+EXCEL_SYSTEM.md
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Local development files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

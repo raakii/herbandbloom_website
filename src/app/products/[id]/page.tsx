@@ -13,7 +13,6 @@ import { useCart } from "../../context/CartContext";
 import SlidingCart from "../../components/SlidingCart";
 import WhatsAppButton from "../../components/WhatsAppButton";
 
-import CartButton from "../../components/CartButton";
 import { useTranslations } from "@/app/hooks/useTranslations";
 import { useLanguage } from "@/app/context/LanguageContext";
 
