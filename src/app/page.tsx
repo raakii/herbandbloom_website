@@ -3,22 +3,29 @@ import React,{useEffect} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import NavbarTwo from "../../components/navbarTwo.js";
+import NavbarTwo from "../../components/navbarTwo";
 import { useTranslations } from "./hooks/useTranslations";
 import { useLanguage } from "./context/LanguageContext";
 import OrderButton from "./components/OrderButton";
+import Product from "../../components/product";
+import { useCart } from "./context/CartContext";
+import SlidingCart from "./components/SlidingCart";
+import CartButton from "./components/CartButton";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 import { Parallax } from 'react-parallax';
 
 const TinySlider = dynamic(()=>import("tiny-slider-react"),{ssr:false})
 import 'tiny-slider/dist/tiny-slider.css';
 import CafeFooter from "../../components/cafeFooter";
-import ScrollTop from "../../components/scrollTop.js";
+import ScrollTop from "../../components/scrollTop";
+import { StaticImport } from "next/dist/shared/lib/get-img-props.js";
 
 export default function Cafe(){
     const translations = useTranslations();
     const { language } = useLanguage();
     const { aboutData, menuData, clientData } = translations;
+    const { cartItems, isCartOpen, openCart, closeCart, updateQuantity, removeFromCart, addToCart, clearCart, cartCount } = useCart();
 
     let settings = {
         container: '.tiny-single-item',
@@ -39,9 +46,100 @@ export default function Cafe(){
     useEffect(()=>{
         document.body.classList.add('cafe-css');
     },[])
+
+    const productData =[
+        {
+            id:1,
+            image1:'/images/IMG_2559.jpeg',
+            image2:'/images/IMG_2576.jpg',
+            product:'Bloom&Grow Hair Oil',
+            amount:'10 000 Fcfa',
+            sizes: ['50ml'],
+            inStock: true,
+        },
+        // {
+        //     id:3,
+        //     image1:'/images/IMG10.png',
+        //     image2:'/images/IMG10.png',
+        //     tag:'Sale',
+        //     tagClass:'text-bg-dark',
+        //     product:'Natural Deodorant',
+        //     amount:'$18.99',
+        //     inStock: true,
+        // },
+        {
+            id:2,
+            image1:'/images/IMG_5474.JPG',
+            image2:'/images/IMG_5454.JPG',
+            tag:'New',
+            tagClass:'text-bg-primary',
+            product:'Bloom & Butter Hair Cream',
+            amount:'5 000 Fcfa',
+            sizes: ['150ml'],
+            inStock: true,
+        },
+        {
+            id:4,
+            image1:'/images/henné.png',
+            image2:'/images/henné2.png',
+            tag:'New',
+            tagClass:'text-bg-primary',
+            product:'Henna Powder',
+            amount:'2 000 Fcfa',
+            sizes: ['150g'],
+            inStock: true,
+        },
+    ]
+   
     return(
         <>
         <NavbarTwo navClass="defaultscroll sticky" manuClass="navigation-menu nav-right nav-light" navDark={false}/>
+        
+        {/* Cart Components */}
+        <SlidingCart 
+            isOpen={isCartOpen}
+            onClose={closeCart}
+            cartItems={cartItems}
+            onUpdateQuantity={updateQuantity}
+            onRemoveItem={removeFromCart}
+            onClearCart={clearCart}
+        />
+        {/* Floating Cart Button */}
+        <div 
+            className="position-fixed" 
+            style={{
+                top: '20px',
+                right: '20px',
+                zIndex: 1050,
+                cursor: 'pointer'
+            }}
+        >
+            <button 
+                className="btn btn-primary rounded-circle shadow-lg"
+                onClick={openCart}
+                style={{
+                    width: '60px',
+                    height: '60px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'relative'
+                }}
+                title="View Cart"
+            >
+                <i className="mdi mdi-cart fs-4 text-white"></i>
+                {cartCount > 0 && (
+                    <span 
+                        className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                        style={{fontSize: '0.75rem'}}
+                    >
+                        {cartCount > 99 ? '99+' : cartCount}
+                    </span>
+                )}
+            </button>
+        </div>
+        
+        
 
         <section className="bg-half-260 d-table w-100 overflow-hidden" id="home" style={{backgroundImage:"url('/images/IMG_2559.jpeg')"}}>
             <div className="bg-overlay bg-gradient-overlay"></div>
@@ -89,7 +187,35 @@ export default function Cafe(){
             </div>
         </section>
 
+        <section className="section pt-5">
+            <div className="container">
+                <div className="row">
+                    <div className="col-12">
+                        <div className="d-flex justify-content-between align-items-center">
+                            <h3 className="mb-0">{translations.products_title}</h3>
+                            <Link href="/products" className="btn btn-outline-primary btn-sm">
+                                {translations.see_all_products}
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">
+                    {productData.map((item,index)=>{
+                        return(
+                            <div className="col-lg-4 col-md-6 col-12 mt-4 pt-2" key={index}>
+                                <Product item={item} onAddToCart={addToCart} onOpenCart={openCart}/>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+        </section>
+
         <section className="section">
+        <div className="section-title text-center mb-4 pb-2">
+        <h4 className="title mb-4">Our muse, Bloom & Grow Hair Oil</h4>
+        </div>
             <div className="row mt-4 pt-2 justify-content-center">
                 {menuData.map((item, index) => {
                     return (
@@ -141,7 +267,7 @@ export default function Cafe(){
                 bgStyle={{with:"auto", height:"100%" }}
                 style={{position:"absolute", width:"100%" , height:"100%"}}
             />
-            <div className="container pt-sm-150 ">
+            <div className="container pt-sm-50 ">
                 <div className="row justify-content-end">
                     <div className="col-md-6 px-0">
                         <div className="bg-white bg-cta px-3 px-md-4 px-lg-5">
@@ -154,10 +280,19 @@ export default function Cafe(){
                                         ? translations.order_instructions
                                         : translations.order_instructions}
                                 </p>
-                                <Link href="tel:+221776588190" className="text-primary h6">+221 77 658 81 90</Link>
-                                <div className="mt-4 pt-2">
-                                    <OrderButton />
-                                </div>
+                                
+                                <br />
+                                <Link 
+                                    href="https://wa.me/221776588190?text=Bonjour%20!%20Je%20suis%20intéressé(e)%20par%20vos%20produits%20Herb%20%26%20Bloom.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn btn-success btn-lg mt-3"
+                                    style={{ backgroundColor: '#25D366', borderColor: '#25D366', fontSize: '18px', padding: '12px 24px' }}
+                                >
+                                    <i className="mdi mdi-whatsapp me-2"></i>
+                                    {language === 'en' ? 'WhatsApp' : 'WhatsApp'}
+                                </Link>
+                               
                             </div>
                         </div>
                     </div>
@@ -183,7 +318,7 @@ export default function Cafe(){
                 <div className="row align-items-center">
                     <div className="col-lg-4 col-md-6">
                         <div className="row text-md-end text-center">
-                            {aboutData.slice(0,3).map((item,index)=>{
+                            {aboutData.slice(0,3).map((item: { image: string | StaticImport; title: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; desc: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; },index: React.Key | null | undefined)=>{
                                 return(
                                 <div className="col-12 mt-4 pt-2" key={index}>
                                     <div className="card features feature-primary border-0">
@@ -228,6 +363,8 @@ export default function Cafe(){
             </div>
         </section>
 
+       
+
         <section className="bg-cta position-relative" style={{backgroundImage:"url('/images/IMG_2559 copy.jpeg')", backgroundPosition:'center'}}>
             <div className="bg-overlay bg-gradient-overlay"></div>
             <div className="container">
@@ -254,6 +391,60 @@ export default function Cafe(){
                 </div>
             </div>
         </section>
+ {/* Coming Soon Section */}
+ <section className="section bg-light">
+            <div className="container">
+                <div className="row align-items-center">
+                    {/* Content Column */}
+                    <div className="col-lg-6 col-md-12">
+                        <div className="section-title text-center text-lg-start mb-4 pb-2">
+                            <div className="d-flex justify-content-center justify-content-lg-start mb-3">
+                               
+                            </div>
+                            <h4 className="title mb-4">
+                                {language === 'en' ? translations.coming_soon_title : translations.coming_soon_title}
+                            </h4>
+                            <p className="text-muted para-desc mb-4">
+                                {language === 'en' ? translations.coming_soon_desc : translations.coming_soon_desc}
+                            </p>
+                            
+                            {/* Email Signup Form */}
+                            <div className="card border-0 shadow-sm">
+                                <div className="card-body p-4">
+                                    <form className="d-flex flex-column flex-md-row gap-3">
+                                        <div className="flex-grow-1">
+                                            <input 
+                                                type="email" 
+                                                className="form-control" 
+                                                placeholder={language === 'en' ? translations.email_placeholder : translations.email_placeholder}
+                                                required
+                                            />
+                                        </div>
+                                        <button 
+                                            type="submit" 
+                                            className="btn btn-primary px-4"
+                                        >
+                                            {language === 'en' ? translations.join_waiting_list : translations.join_waiting_list}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {/* Image Column */}
+                    <div className="col-lg-6 col-md-12 mt-4 mt-lg-0">
+                        <div className="text-center">
+                            <div className="position-relative">
+                            <Image src='/images/deo1.png' width={0} height={0} sizes="100vw" style={{width:'60%', height:'auto'}} className="img-fluid rounded" alt=""/>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section className="section">
             <div className="container">
                 <div className="row align-items-center">
@@ -302,7 +493,17 @@ export default function Cafe(){
                                 <p className="text-muted">
                                     {language === 'en' ? 'Contact us directly or via Whatsapp' : 'Contactez-nous directement ou via Whatsapp'}
                                 </p>
-                                <Link href="tel:+221776588190" className="text-foot" style={{ color: "#e6ccb2" }}>+221 77 658 81 90</Link>
+
+                                <Link 
+                                    href="https://wa.me/221776588190?text=Bonjour%20!%20Je%20suis%20intéressé(e)%20par%20vos%20produits%20Herb%20%26%20Bloom.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn btn-success btn-lg mt-3"
+                                    style={{ backgroundColor: '#25D366', borderColor: '#25D366', fontSize: '18px', padding: '12px 24px' }}
+                                >
+                                    <i className="mdi mdi-whatsapp me-2"></i>
+                                    {language === 'en' ? 'WhatsApp' : 'WhatsApp'}
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -344,6 +545,9 @@ export default function Cafe(){
         </section>
         <CafeFooter/>
         <ScrollTop/>
+        
+        {/* Bouton WhatsApp flottant */}
+        <WhatsAppButton />
         </>
     )
 }

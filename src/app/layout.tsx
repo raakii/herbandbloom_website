@@ -5,6 +5,7 @@ import '../../public/assets/scss/style.scss';
 import '../../public/assets/css/materialdesignicons.min.css';
 import PreloadAllPages from './preload-pages';
 import { LanguageProvider } from './context/LanguageContext';
+import { CartProvider } from './context/CartContext';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -52,9 +53,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <LanguageProvider>
-        {/* Composant pour précharger toutes les pages */}
-        <PreloadAllPages />
-        {children}
+          <CartProvider>
+            {/* Composant pour précharger toutes les pages */}
+            <PreloadAllPages />
+            {children}
+          </CartProvider>
         </LanguageProvider>
       </body>
     </html>

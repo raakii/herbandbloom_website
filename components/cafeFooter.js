@@ -30,6 +30,11 @@ export default function CafeFooter(){
                                         <p className="mb-2 h6" style={{ color: "#e5decf" }}>{translations.footer_location}</p>
                                         <p className="mb-2 h6" style={{ color: "#e5decf" }}>{translations.footer_weekdays}</p>
                                         <p className="mb-2 h6" style={{ color: "#e5decf" }}>{translations.footer_weekends}</p>
+                                        <p className="mb-2 h6" style={{ color: "#e5decf" }}>
+                                            <Link href="tel:+221776588190" style={{ color: "#e5decf", textDecoration: "none" }}>
+                                                📞 +221 77 658 81 90
+                                            </Link>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

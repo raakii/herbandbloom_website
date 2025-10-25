@@ -2,6 +2,7 @@
 
 import { useTranslations } from '../hooks/useTranslations';
 import { useLanguage } from '../context/LanguageContext';
+import { useRouter } from 'next/navigation';
 
 interface OrderButtonProps {
     className?: string;
@@ -11,20 +12,15 @@ interface OrderButtonProps {
 export default function OrderButton({ className = '', onClick }: OrderButtonProps) {
     const translations = useTranslations();
     const { language } = useLanguage();
+    const router = useRouter();
 
-    const handleWhatsAppClick = () => {
-        const phoneNumber = "+221776588190";
-        const message = language === 'en' 
-            ? translations.order_message
-            : translations.order_message_fr;
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-        window.open(whatsappURL, '_blank');
+    const handleOrderClick = () => {
+        router.push('/products');
     };
 
     return (
         <button
-            onClick={onClick || handleWhatsAppClick}
+            onClick={onClick || handleOrderClick}
             className={`btn btn-font-sm btn-lg btn-primary text-uppercase mt-2 ${className}`}
             style={{
                 backgroundColor: '#4CAF50',
